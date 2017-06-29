@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Popular Movies Stage 1</string>
+    <string name="user_rating">User Rating:</string>
+    <string name="released_on">Released on :</string>
+    <string name="synopsis">Synopsis:</string>
+    <string name="refresh">Refresh</string>
+    <string name="error_text">Connection Error. Please make sure that your internet connection is working.</string>
+    <string name="movie_poster_cd">Movie Poster</string>
+</resources>

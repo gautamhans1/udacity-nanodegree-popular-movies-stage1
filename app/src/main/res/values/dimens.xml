@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_radius">0dp</dimen>
+    <dimen name="movie_poster_height">300dp</dimen>
+    <dimen name="movie_title_padding">10dp</dimen>
+    <dimen name="movie_title">15sp</dimen>
+    <dimen name="rating_padding">10sp</dimen>
+
+</resources>
