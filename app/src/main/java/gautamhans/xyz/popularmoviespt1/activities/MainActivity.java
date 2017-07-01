@@ -92,41 +92,6 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.floating_menu);
-        fab_popular = (FloatingActionButton) findViewById(R.id.fab_popular_movies);
-        fab_top_rated = (FloatingActionButton) findViewById(R.id.fab_top_rated);
-        connectionErrorText = (TextView) findViewById(R.id.connection_error);
-        refreshButton = (Button) findViewById(R.id.refresh_button);
-        noInternetIV = (ImageView) findViewById(R.id.no_internet_image);
-        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.floating_menu);
-        floatingActionMenu.setMenuButtonColorNormal(ContextCompat.getColor(context, R.color.colorAccent));
-        floatingActionMenu.setMenuButtonColorPressed(ContextCompat.getColor(context, R.color.fab_pressed));
-
-
-        fab_popular.setOnClickListener(clickListener);
-        fab_top_rated.setOnClickListener(clickListener);
-        refreshButton.setOnClickListener(clickListener);
-
-        materialDialog = new MaterialDialog.Builder(context)
-                .backgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDarker))
-                .titleColor(ContextCompat.getColor(context, R.color.white))
-                .contentColor(ContextCompat.getColor(context, R.color.white))
-                .title("Loading")
-                .progress(true, 0)
-                .build();
-
-        if (isOnline()) {
-            new AsyncFetchPopular().execute();
-        } else {
-            showError();
-        }
-    }
-
     private void showError() {
         noInternetIV.setVisibility(View.VISIBLE);
         connectionErrorText.setVisibility(View.VISIBLE);
@@ -165,18 +130,53 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MyApplication.getInstance().setConnectivityListener(this);
-    }
-
     private void showNoMovieError() {
         noInternetIV.setImageResource(R.drawable.no_movies);
         connectionErrorText.setText(noMovies);
         noInternetIV.setVisibility(View.VISIBLE);
         connectionErrorText.setVisibility(View.VISIBLE);
         refreshButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.floating_menu);
+        fab_popular = (FloatingActionButton) findViewById(R.id.fab_popular_movies);
+        fab_top_rated = (FloatingActionButton) findViewById(R.id.fab_top_rated);
+        connectionErrorText = (TextView) findViewById(R.id.connection_error);
+        refreshButton = (Button) findViewById(R.id.refresh_button);
+        noInternetIV = (ImageView) findViewById(R.id.no_internet_image);
+        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.floating_menu);
+        floatingActionMenu.setMenuButtonColorNormal(ContextCompat.getColor(context, R.color.colorAccent));
+        floatingActionMenu.setMenuButtonColorPressed(ContextCompat.getColor(context, R.color.fab_pressed));
+
+
+        fab_popular.setOnClickListener(clickListener);
+        fab_top_rated.setOnClickListener(clickListener);
+        refreshButton.setOnClickListener(clickListener);
+
+        materialDialog = new MaterialDialog.Builder(context)
+                .backgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDarker))
+                .titleColor(ContextCompat.getColor(context, R.color.white))
+                .contentColor(ContextCompat.getColor(context, R.color.white))
+                .title("Loading")
+                .progress(true, 0)
+                .build();
+
+        if (isOnline()) {
+            new AsyncFetchPopular().execute();
+        } else {
+            showError();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private class AsyncFetchPopular extends AsyncTask<String, String, String> {
