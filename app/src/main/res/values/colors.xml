@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="movieTitle">#4c4c4c</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#80cbc4</color>
+    <color name="fab_pressed">#96eae2</color>
+    <color name="movieTitle">#FFF</color>
+    <color name="primary_material_dark_1">#212121</color>
+    <color name="background_material_light">#303030</color>
+    <color name="foreground_material_light">#ffffff</color>
+    <color name="colorPrimaryDarker">#222222</color>
 </resources>

@@ -28,7 +28,8 @@
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
                 android:textSize="@dimen/movie_title_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/movie_tag_line"
@@ -37,10 +38,12 @@
                 android:layout_below="@id/movie_title"
                 android:layout_marginLeft="@dimen/movie_title_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
-                android:layout_toRightOf="@id/movie_poster" />
+                android:layout_toRightOf="@id/movie_poster"
+                android:textColor="@color/white"/>
 
 
             <RatingBar
+                android:theme="@style/RatingBar"
                 android:id="@+id/movie_rating"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
@@ -59,7 +62,8 @@
                 android:layout_marginLeft="@dimen/movie_rating_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_rating"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/release_date_tv"
@@ -69,7 +73,8 @@
                 android:layout_marginLeft="@dimen/movie_title_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
-                android:text="@string/released_on" />
+                android:text="@string/released_on"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/release_date"
@@ -78,7 +83,8 @@
                 android:layout_below="@id/movie_rating"
                 android:layout_marginLeft="@dimen/release_date_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
-                android:layout_toRightOf="@id/release_date_tv" />
+                android:layout_toRightOf="@id/release_date_tv"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/movie_synopsis_tv"
@@ -88,7 +94,8 @@
                 android:layout_marginLeft="@dimen/movie_title_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
-                android:text="@string/synopsis" />
+                android:text="@string/synopsis"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/movie_synopsis"
@@ -97,7 +104,8 @@
                 android:layout_below="@id/movie_synopsis_tv"
                 android:layout_marginLeft="@dimen/movie_title_margin_left"
                 android:layout_marginTop="@dimen/movie_title_margin_top"
-                android:layout_toRightOf="@id/movie_poster" />
+                android:layout_toRightOf="@id/movie_poster"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </ScrollView>

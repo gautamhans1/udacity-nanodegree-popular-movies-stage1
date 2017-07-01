@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
         android:elevation="3dp"
+        card_view_popular:cardBackgroundColor="@color/colorPrimaryDarker"
         card_view_popular:cardCornerRadius="@dimen/card_radius">
 
         <RelativeLayout

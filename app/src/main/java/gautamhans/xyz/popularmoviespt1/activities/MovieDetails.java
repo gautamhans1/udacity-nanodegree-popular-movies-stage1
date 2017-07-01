@@ -1,10 +1,12 @@
 package gautamhans.xyz.popularmoviespt1.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -37,7 +40,8 @@ public class MovieDetails extends AppCompatActivity {
     private TextView movieTitle, movieTagLine, movieReleasedOn, movieSynopsis, movieRatingText;
     private RatingBar movieRating;
     private ImageView moviePoster;
-
+    private MaterialDialog materialDialog;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,15 @@ public class MovieDetails extends AppCompatActivity {
         moviePoster = (ImageView) findViewById(R.id.movie_poster);
         movieRatingText = (TextView) findViewById(R.id.movie_rating_text);
 
+
+        materialDialog = new MaterialDialog.Builder(context)
+                .backgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDarker))
+                .titleColor(ContextCompat.getColor(context, R.color.white))
+                .contentColor(ContextCompat.getColor(context, R.color.white))
+                .title("Loading")
+                .progress(true, 0)
+                .build();
+
         new AsyncFetch().execute();
     }
 
@@ -80,7 +93,6 @@ public class MovieDetails extends AppCompatActivity {
 
     private class AsyncFetch extends AsyncTask<String, String, String> {
 
-        ProgressDialog pdLoading = new ProgressDialog(MovieDetails.this);
         HttpURLConnection conn;
         URL url = null;
 
@@ -88,9 +100,9 @@ public class MovieDetails extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pdLoading.setMessage("Loading movie details...");
-            pdLoading.setCancelable(false);
-            pdLoading.show();
+            materialDialog.setContent("Loading movie details...");
+            materialDialog.setCancelable(false);
+            materialDialog.show();
         }
 
 
@@ -149,7 +161,7 @@ public class MovieDetails extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            pdLoading.dismiss();
+            materialDialog.dismiss();
 
             try {
                 Log.d("result", result);

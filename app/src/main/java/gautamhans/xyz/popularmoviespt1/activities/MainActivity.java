@@ -1,14 +1,13 @@
 package gautamhans.xyz.popularmoviespt1.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.clans.fab.BuildConfig;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
     private static final String noMovies = "Sorry, no movies found.";
     private static String type = "popular";
     boolean isLandscape = false;
+    MaterialDialog materialDialog;
     private RecyclerView mRecyclerView;
     private PopularMovies mAdapter;
     private FloatingActionMenu floatingActionMenu;
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
     private TextView connectionErrorText;
     private Button refreshButton;
     private ImageView noInternetIV;
+    private Context context = this;
+    private FloatingActionButton floatingActionButton;
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -101,11 +103,22 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         connectionErrorText = (TextView) findViewById(R.id.connection_error);
         refreshButton = (Button) findViewById(R.id.refresh_button);
         noInternetIV = (ImageView) findViewById(R.id.no_internet_image);
+        floatingActionMenu = (FloatingActionMenu) findViewById(R.id.floating_menu);
+        floatingActionMenu.setMenuButtonColorNormal(ContextCompat.getColor(context, R.color.colorAccent));
+        floatingActionMenu.setMenuButtonColorPressed(ContextCompat.getColor(context, R.color.fab_pressed));
+
 
         fab_popular.setOnClickListener(clickListener);
         fab_top_rated.setOnClickListener(clickListener);
         refreshButton.setOnClickListener(clickListener);
 
+        materialDialog = new MaterialDialog.Builder(context)
+                .backgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDarker))
+                .titleColor(ContextCompat.getColor(context, R.color.white))
+                .contentColor(ContextCompat.getColor(context, R.color.white))
+                .title("Loading")
+                .progress(true, 0)
+                .build();
 
         if (isOnline()) {
             new AsyncFetchPopular().execute();
@@ -158,9 +171,18 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         MyApplication.getInstance().setConnectivityListener(this);
     }
 
+    private void showNoMovieError() {
+        noInternetIV.setImageResource(R.drawable.no_movies);
+        connectionErrorText.setText(noMovies);
+        noInternetIV.setVisibility(View.VISIBLE);
+        connectionErrorText.setVisibility(View.VISIBLE);
+        refreshButton.setVisibility(View.VISIBLE);
+    }
+
     private class AsyncFetchPopular extends AsyncTask<String, String, String> {
 
-        ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
+//        ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
+
         HttpURLConnection conn;
         URL url = null;
 
@@ -169,11 +191,11 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
             super.onPreExecute();
 
             if (type == "popular")
-                pdLoading.setMessage("Loading popular movies...");
+                materialDialog.setContent("Loading popular movies...");
             else
-                pdLoading.setMessage("Loading top rated movies...");
-            pdLoading.setCancelable(false);
-            pdLoading.show();
+                materialDialog.setContent("Loading top rated movies...");
+            materialDialog.setCancelable(false);
+            materialDialog.show();
 
         }
 
@@ -235,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         @Override
         protected void onPostExecute(String result) {
 //            super.onPostExecute(s);
-            pdLoading.dismiss();
+            materialDialog.dismiss();
             try {
                 refreshButton.setVisibility(View.GONE);
                 connectionErrorText.setVisibility(View.GONE);
@@ -245,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
             }
             List<Results> data = new ArrayList<>();
 
-            pdLoading.dismiss();
+            materialDialog.dismiss();
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
@@ -282,13 +304,5 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
                 showNoMovieError();
             }
         }
-    }
-
-    private void showNoMovieError(){
-        noInternetIV.setImageResource(R.drawable.no_movies);
-        connectionErrorText.setText(noMovies);
-        noInternetIV.setVisibility(View.VISIBLE);
-        connectionErrorText.setVisibility(View.VISIBLE);
-        refreshButton.setVisibility(View.VISIBLE);
     }
 }
