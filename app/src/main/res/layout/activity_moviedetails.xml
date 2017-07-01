@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
     <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -17,10 +13,10 @@
 
             <ImageView
                 android:id="@+id/movie_poster"
-                android:layout_width="150dp"
-                android:layout_height="250dp"
+                android:layout_width="@dimen/movie_poster_width"
+                android:layout_height="@dimen/movie_poster_height"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/movie_poster_margin_top"
                 android:contentDescription="@string/movie_poster_cd"
                 android:scaleType="fitXY" />
 
@@ -28,10 +24,10 @@
                 android:id="@+id/movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
-                android:textSize="20sp"
+                android:textSize="@dimen/movie_title_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -39,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_title"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster" />
 
 
@@ -50,8 +46,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_tag_line"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
                 android:numStars="10" />
 
@@ -60,8 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_tag_line"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_rating_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_rating"
                 android:textSize="10sp" />
 
@@ -70,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_rating"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
                 android:text="@string/released_on" />
 
@@ -80,8 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_rating"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/release_date_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/release_date_tv" />
 
             <TextView
@@ -89,8 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/release_date_tv"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster"
                 android:text="@string/synopsis" />
 
@@ -99,10 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movie_synopsis_tv"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/movie_title_margin_left"
+                android:layout_marginTop="@dimen/movie_title_margin_top"
                 android:layout_toRightOf="@id/movie_poster" />
 
         </RelativeLayout>
     </ScrollView>
-</RelativeLayout>
+

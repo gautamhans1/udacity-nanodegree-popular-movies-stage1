@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ public class MovieDetails extends AppCompatActivity {
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
     private static String POSTER_BASE_URL = "http://image.tmdb.org/t/p/w300/";
-    private static String END_VOTE="/10";
+    private static String END_VOTE = "/10";
     private String movie_id, movie_title;
     private TextView movieTitle, movieTagLine, movieReleasedOn, movieSynopsis, movieRatingText;
     private RatingBar movieRating;
@@ -66,6 +67,17 @@ public class MovieDetails extends AppCompatActivity {
         new AsyncFetch().execute();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private class AsyncFetch extends AsyncTask<String, String, String> {
 
         ProgressDialog pdLoading = new ProgressDialog(MovieDetails.this);
@@ -86,7 +98,7 @@ public class MovieDetails extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                url = new URL("https://api.themoviedb.org/3/movie/"+movie_id+"?api_key=<<YOUR_API_KEY_HERE>>&language=en-US");
+                url = new URL("https://api.themoviedb.org/3/movie/" + movie_id + "?api_key=&language=en-US");
                 Log.d("url", String.valueOf(url));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -143,24 +155,24 @@ public class MovieDetails extends AppCompatActivity {
                 Log.d("result", result);
                 JSONObject jsonObject = new JSONObject(result);
                 Log.d("json resp", String.valueOf(jsonObject));
-                    Picasso.with(MovieDetails.this).load(POSTER_BASE_URL + jsonObject.getString("poster_path"))
-                            .placeholder(R.drawable.noposter)
-                            .error(R.drawable.noposter)
-                            .into(moviePoster);
-                    movieTitle.setText(jsonObject.getString("original_title"));
-                    if(jsonObject.getString("tagline")!=null){
-                        movieTagLine.setText(jsonObject.getString("tagline"));
-                    }
-                    movieRating.setRating((float) jsonObject.getDouble("vote_average"));
+                Picasso.with(MovieDetails.this).load(POSTER_BASE_URL + jsonObject.getString("poster_path"))
+                        .placeholder(R.drawable.noposter)
+                        .error(R.drawable.noposter)
+                        .into(moviePoster);
+                movieTitle.setText(jsonObject.getString("original_title"));
+                if (jsonObject.getString("tagline") != null) {
+                    movieTagLine.setText(jsonObject.getString("tagline"));
+                }
+                movieRating.setRating((float) jsonObject.getDouble("vote_average"));
                 String finalRating = jsonObject.getString("vote_average") + END_VOTE;
                 movieRatingText.setText(finalRating);
-                    movieReleasedOn.setText(jsonObject.getString("release_date"));
-                    movieSynopsis.setText(jsonObject.getString("overview"));
-                    try {
-                        getSupportActionBar().setTitle(jsonObject.getString("original_title"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                movieReleasedOn.setText(jsonObject.getString("release_date"));
+                movieSynopsis.setText(jsonObject.getString("overview"));
+                try {
+                    getSupportActionBar().setTitle(jsonObject.getString("original_title"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
             } catch (JSONException e) {
@@ -169,16 +181,5 @@ public class MovieDetails extends AppCompatActivity {
 
         }
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == android.R.id.home) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

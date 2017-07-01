@@ -3,9 +3,23 @@
 
     <dimen name="card_margin">5dp</dimen>
     <dimen name="card_radius">0dp</dimen>
-    <dimen name="movie_poster_height">300dp</dimen>
+    <dimen name="movie_poster_height">250dp</dimen>
     <dimen name="movie_title_padding">10dp</dimen>
     <dimen name="movie_title">15sp</dimen>
     <dimen name="rating_padding">10sp</dimen>
+    <dimen name="error_layout_width">150dp</dimen>
+    <dimen name="error_layout_height">150dp</dimen>
+    <dimen name="error_margin_top">100dp</dimen>
+    <dimen name="errorText_layout_width">200dp</dimen>
+    <dimen name="errorText_layout_marginTop">17dp</dimen>
+    <dimen name="refreshBtn_margin_top">15dp</dimen>
+    <dimen name="movie_poster_width">150dp</dimen>
+    <dimen name="movie_poster_margin_top">10dp</dimen>
+    <dimen name="movie_title_margin_left">20dp</dimen>
+    <dimen name="movie_title_margin_top">10dp</dimen>
+    <dimen name="movie_title_size">20sp</dimen>
+    <dimen name="movie_rating_margin_left">2dp</dimen>
+    <dimen name="release_date_margin_left">5dp</dimen>
+    <dimen name="movie_poster_main_height">300dp</dimen>
 
 </resources>

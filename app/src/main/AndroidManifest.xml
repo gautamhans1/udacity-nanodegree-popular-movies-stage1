@@ -17,16 +17,19 @@
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="orientation|keyboardHidden"
-            >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MovieDetails"
-            android:noHistory="true">
-
+        <activity
+            android:name=".activities.MovieDetails"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
 
         <receiver

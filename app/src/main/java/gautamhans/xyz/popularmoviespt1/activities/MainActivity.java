@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements PopularMovies.Mov
         protected String doInBackground(String... params) {
 
             try {
-                url = new URL("http://api.themoviedb.org/3/movie/" + type + "?api_key=<<YOUR_API_KEY_HERE>>");
+                url = new URL("http://api.themoviedb.org/3/movie/" + type + "?api_key=");
                 Log.d("url", String.valueOf(url));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
